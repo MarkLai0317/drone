@@ -6,22 +6,27 @@ from geometry_msgs.msg import Twist
 from std_msgs.msg import Empty
 
 
-def tello_pass(t1):
+
+
+def tello_pass(t1, rec_count=0):
   
   # control loop
   check = False
+
+  
+
   while not rospy.is_shutdown():
   
     # wait
-    while t1.state.target_x == -1 and t1.state.target_y == -1:
+    while t1.state.target_x[rec_count] == -1 and t1.state.target_y[rec_count] == -1:
       pass
     
-    print(t1.state.target_x, t1.state.target_y)
+    print(t1.state.target_x[rec_count], t1.state.target_y[rec_count])
     
-    dx = t1.state.target_x - 480
-    dy = t1.state.target_y - 200
+    dx = t1.state.target_x[rec_count] - 480
+    dy = t1.state.target_y[rec_count] - 200
     
-    if t1.state.canPass == 1:
+    if t1.state.canPass[rec_count] == 1:
       msg = Twist()
       msg.linear.y = 1
       #msg.linear.z = 0.1
@@ -33,9 +38,10 @@ def tello_pass(t1):
   
       msg = Twist()
       t1.controler.move(msg, 1)
+      #rec_count += 1
       break
     
-    elif t1.state.canPass == 0:
+    elif t1.state.canPass[rec_count] == 0:
       
       msg = Twist()
       msg.linear.y = 0.5
@@ -69,6 +75,16 @@ def tello_pass(t1):
           msg = Twist()
           msg.linear.y = 0.2
           t1.controler.move(msg, 0.5)
+
+
+def tello_turn(t1):
+     while not rospy.is_shutdown():
+        while len(t1.state.tag_center) == 0 and len(t1.state.tag_corners) == 0:
+            pass
+        msg = Twist()
+        t1.controler.rotate(msg)
+
+        
           
 def main():
   t1 = simple_tello.Tello_drone()
@@ -79,7 +95,11 @@ def main():
   while t1.state.fly_mode != 6:
     print("wait...")
   
-  tello_pass(t1)
+  tello_pass(t1, 0)
+
+  tello_turn(t1)
+
+  tello_pass(t1, 1)
   
   while t1.state.fly_mode != 6:
     print("wait...") 
