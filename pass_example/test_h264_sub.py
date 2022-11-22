@@ -140,7 +140,7 @@ def main():
             detector = apriltag.Detector()
             tag_result = detector.detect(gray_image)
             if len(tag_result) != 0:
-                tag_pub.publish(Float64MultiArray(data = [tag_result[0].center, tag_result[0].corners]))
+                tag_pub.publish(Float64MultiArray(data = [tag_result[0].center, tag_result[0].corners, tag_result[0].tag_id]))
                 start_detect_tag = False
                 start_detect2 = True
 

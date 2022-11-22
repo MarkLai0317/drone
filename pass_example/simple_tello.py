@@ -164,4 +164,5 @@ class Tello_drone():
     def _tp_cb(self, data):
         self.state.tag_center = data.data[0]
         self.state.tag_corners = data.data[1]
+        self.state.tag_id = data.data[2]
 
