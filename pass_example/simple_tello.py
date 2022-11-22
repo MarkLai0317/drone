@@ -156,12 +156,12 @@ class Tello_drone():
         self.state.fly_mode = data.fly_mode
         
     def _tp_cb(self, data):
-        self.state.rec_count = data.data[3]
+        self.state.rec_count = int(data.data[3])
         self.state.target_x[self.state.rec_count] = data.data[0]
         self.state.target_y[self.state.rec_count] = data.data[1]
         self.state.canPass[self.state.rec_count] = data.data[2]
 
-    def _tp_cb(self, data):
+    def _tg_cb(self, data):
         self.state.tag_center = data.data[0]
         self.state.tag_corners = data.data[1]
         self.state.tag_id = data.data[2]
