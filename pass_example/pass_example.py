@@ -33,7 +33,7 @@ def tello_pass(t1, rec_count=0):
             t1.controler.move(msg, 3)
 
             msg = Twist()
-            t1.controler.move(msg, 1)
+            t1.controler.move(msg, 3)
             #rec_count += 1
             break
 
@@ -75,7 +75,7 @@ def tello_pass(t1, rec_count=0):
 
 def tello_turn(t1):
     while not rospy.is_shutdown():
-        while len(t1.state.tag_center) == 0 and len(t1.state.tag_corners) == 0:
+        while t1.state.tage_id == -1:
             pass
         
         msg = Twist()

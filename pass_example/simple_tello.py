@@ -22,8 +22,7 @@ class TelloState:
         self.target_y = [-1, -1]
         self.canPass = [-1, -1]
 
-        self.tag_center = []
-        self.tag_corners = []
+        self.tag_id = -1
 
 class TelloController:
 
@@ -162,7 +161,5 @@ class Tello_drone():
         self.state.canPass[self.state.rec_count] = data.data[2]
 
     def _tg_cb(self, data):
-        self.state.tag_center = data.data[0]
-        self.state.tag_corners = data.data[1]
-        self.state.tag_id = data.data[2]
+        self.state.tag_id = int(data.data[0])
 
