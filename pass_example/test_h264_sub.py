@@ -66,14 +66,14 @@ def find_Mask(img):
     return rm
 
 def find_green_mask(img):
-    lr = np.array([36,0,0])
-    ur = np.array([86,255,255])
+    lr = np.array([40,17,28])
+    ur = np.array([80,255,255])
     rm = cv2.inRange(img, lr, ur)
     return rm
 
 def find_blue_mask(img):
-    lr = np.array([110,50,50])
-    ur = np.array([130,255,255])
+    lr = np.array([87,89,75])
+    ur = np.array([179,255,255])
     rm = cv2.inRange(img, lr, ur)
     return rm
 
@@ -111,9 +111,11 @@ def main():
         red_mask = mask_arr[rec_count](hsv_img)
 
         _, c_c, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-        max_c = max(c_c, key = cv2.contourArea)
-        if len(c_c) == 0:
+        
+        if(len(c_c) == 0 or cv):
             continue
+        max_c = max(c_c, key = cv2.contourArea)
+        
         rect = cv2.minAreaRect(max_c)
         r_w, r_h = rect[1]
         rec_x = rect[0][0]
