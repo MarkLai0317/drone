@@ -77,7 +77,7 @@ def find_blue_mask(img):
     rm = cv2.inRange(img, lr, ur)
     return rm
 
-mask_arr = [find_Mask, find_green_mask, find_blue_mask]
+mask_arr = [find_blue_mask,find_green_mask, find_Mask]
 
 def main():
 
