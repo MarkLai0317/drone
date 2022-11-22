@@ -112,6 +112,8 @@ def main():
 
         _, c_c, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
         max_c = max(c_c, key = cv2.contourArea)
+        if len(c_c) == 0:
+            continue
         rect = cv2.minAreaRect(max_c)
         r_w, r_h = rect[1]
         rec_x = rect[0][0]
