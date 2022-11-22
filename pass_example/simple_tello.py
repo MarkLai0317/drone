@@ -17,13 +17,13 @@ class TelloState:
         self.is_flying = False
         self.fly_mode = 999
 
-        self.state.rec_count = 0
+        self.rec_count = 0
         self.target_x = [-1, -1]
         self.target_y = [-1, -1]
         self.canPass = [-1, -1]
 
-        self.state.tag_center = []
-        self.state.tag_corners = []
+        self.tag_center = []
+        self.tag_corners = []
 
 class TelloController:
 
