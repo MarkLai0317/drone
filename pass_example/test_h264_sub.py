@@ -72,7 +72,7 @@ def find_green_mask(img):
     return rm
 
 def find_blue_mask(img):
-    lr = np.array([87,89,75])
+    lr = np.array([60,60,60])
     ur = np.array([179,255,255])
     rm = cv2.inRange(img, lr, ur)
     return rm
