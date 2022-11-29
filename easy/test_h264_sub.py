@@ -87,6 +87,12 @@ def main():
         hsv_img = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         red_mask = find_Mask(hsv_img)
         c_c, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+
+        # _, c_c, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+
+        if(len(c_c) == 0):
+            continue
+
         max_c = max(c_c, key = cv2.contourArea)
         rect = cv2.minAreaRect(max_c)
         r_w, r_h = rect[1]
