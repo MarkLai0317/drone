@@ -86,7 +86,7 @@ def main():
         
         hsv_img = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         red_mask = find_Mask(hsv_img)
-        c_c, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+        _,  c_c, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
         # _, c_c, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
@@ -115,7 +115,7 @@ def main():
             point_pub.publish(Float64MultiArray(data = [rec_x, rec_y, 0]))            
         
         out.write(np.concatenate((image, show_image), axis = 1))    
-        cv2.imshow('result', np.concatenate((image, show_image), axis = 1))
+        cv2.imshow('result', cv2.resize(np.concatenate((image, show_image), axis = 1), (960, 360)))
         cv2.waitKey(1)
         if frame.time_base < 1.0/60:
           time_base = 1.0/60

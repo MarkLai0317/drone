@@ -109,7 +109,7 @@ def main():
         gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         hsv_img = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         red_mask = mask_arr[rec_count](hsv_img)
-
+        # red_mask = find_blue_mask(hsv_img)
         _, c_c, _ = cv2.findContours(red_mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
         
         if(len(c_c) == 0):

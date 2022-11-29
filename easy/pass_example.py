@@ -26,10 +26,12 @@ def tello_pass(t1):
       msg.linear.y = 0.4
       #msg.linear.z = 0.1
       t1.controler.move(msg, 3)
+     
       
+
       msg = Twist()
       msg.linear.y = 0.5
-      t1.controler.move(msg, 3)
+      t1.controler.move(msg, 4)
   
       msg = Twist()
       t1.controler.move(msg, 1)
@@ -37,10 +39,7 @@ def tello_pass(t1):
     
     elif t1.state.canPass == 0:
       
-      msg = Twist()
-      msg.linear.y = 0.5
-      t1.controler.move(msg, 0.5)
-
+      
       if check == False:
         if abs(dx) < 24 and abs(dy) < 24:
           check = True
